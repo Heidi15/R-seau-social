@@ -1,3 +1,5 @@
+from outils import Pile
+
 def test_pile():
     p = Pile()
     assert p.est_vide() == True, "La pile doit être vide à l'initialisation"

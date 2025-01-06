@@ -15,3 +15,7 @@ def test_pile():
     
     p.depiler()
     assert p.est_vide() == True, "La pile doit être vide après avoir tout dépilé"
+
+if __name__ == "__main__":
+    test_pile()
+    print("Tests de la pile réussis!")

@@ -39,3 +39,26 @@ class File:
         return self.elements[0]
     
 class Aretes:
+    def __init__(self, matrice):
+        self.matrice= matrice
+    
+    def aretesmatrice (self):
+        if self.matrice:
+            count= 0
+            for i in range (len(self.matrice)):
+                for ii in range (i+1, len(self.matrice)):
+                    if self.matrice [i][ii]:
+                        count+=1
+            return count
+
+    def __init__(self, liste):
+        self.liste= liste
+    
+    def aretesliste (self):
+        if self.liste:
+            count= 0
+            for i in range (len(self.liste)):
+                for ii in range (len(self.liste)):
+                    if self.liste[i]< self.liste[ii]:
+                        count+=1
+            return count

@@ -40,34 +40,20 @@ class File:
 
 class Profondeur:
    def parcours_profondeur(matrice_adj, sommet_depart):
-        """
-        Réalise un parcours en profondeur d'un graphe orienté à partir d'un sommet donné.
-        
-        Args:
-            matrice_adj (list): Matrice d'adjacence du graphe
-            sommet_depart (int): Sommet de départ du parcours
-            
-        Returns:
-            list: Liste des sommets visités dans l'ordre du parcours
-        """
         n = len(matrice_adj)  # nombre de sommets
         visites = [False] * n  # tableau pour marquer les sommets visités
         sommets_visites = []  # liste pour stocker l'ordre de visite
-        pile = Pile()  # utilisation de la classe Pile
-        
-        # On commence par le sommet de départ
+        pile = Pile()  # utilisation de la classe Pile 
+
         pile.empiler(sommet_depart)
         
         while not pile.est_vide():
             sommet = pile.depiler()
             
             if not visites[sommet]:
-                # Marquer le sommet comme visité et l'ajouter à la liste
                 visites[sommet] = True
                 sommets_visites.append(sommet)
                 
-                # Parcourir les voisins dans l'ordre inverse pour respecter l'ordre naturel
-                # car on utilise une pile (LIFO)
                 for voisin in range(n-1, -1, -1):
                     if matrice_adj[sommet][voisin] == 1 and not visites[voisin]:
                         pile.empiler(voisin)

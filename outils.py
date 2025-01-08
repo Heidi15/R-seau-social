@@ -37,3 +37,6 @@ class File:
         if self.est_vide():
             raise IndexError("La file est vide")
         return self.elements[0]
+    
+class Largeur:
+        

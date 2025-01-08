@@ -1,7 +1,6 @@
-import unittest
 from outils import plus_grands_influenceurs
 
-class TestPlusGrandsInfluenceurs(unittest.TestCase):
+class TestPlusGrandsInfluenceurs():
     def test_cas_simple(self):
         reseau = {
             'Sellia': ['Léa', 'Heidi'],
@@ -31,4 +30,4 @@ class TestPlusGrandsInfluenceurs(unittest.TestCase):
         self.assertEqual(set(plus_grands_influenceurs(reseau)), {'Sellia', 'Léa', 'Heidi'})
 
 if __name__ == '__main__':
-    unittest.main()
+    TestPlusGrandsInfluenceurs()

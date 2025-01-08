@@ -3,7 +3,7 @@ Projet « Réseau Social »
 
 Membres du groupe : Heidi, Léa, Sellia
 
-User Story en cours : 4, 5, 6
+User Story en cours : 8, 10, 11
 
 Contraintes de réalisation :
 - Pas de module Python de manipulation de graphes

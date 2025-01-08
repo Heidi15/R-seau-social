@@ -1,3 +1,5 @@
+from outils import Graphe
+
 def test_charger_graphe():
     # Test 1: Graphe orienté simple avec matrice d'adjacence
     description1 = """

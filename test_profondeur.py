@@ -20,3 +20,34 @@ def lire_graphe(nom_fichier):
             matrice[source][destination] = 1
             
     return matrice
+
+# Tests
+if __name__ == "__main__":
+    # Lecture du graphe
+    matrice = lire_graphe("go-9-01.txt")
+    
+    # Test 1: Vérifier que le parcours commence par le sommet de départ
+    sommet_depart = 0
+    resultat = parcours_profondeur(matrice, sommet_depart)
+    assert resultat[0] == sommet_depart, f"Le parcours devrait commencer par le sommet {sommet_depart}"
+    
+    # Test 2: Vérifier que tous les sommets accessibles sont visités
+    assert len(set(resultat)) == len(resultat), "Le parcours ne devrait pas contenir de doublons"
+    
+    # Test 4: Vérifier le parcours depuis différents sommets de départ
+    for sommet in [3, 5, 8]:
+        resultat = parcours_profondeur(matrice, sommet)
+        assert resultat[0] == sommet, f"Le parcours depuis {sommet} devrait commencer par {sommet}"
+    
+    # Test 5: Vérifier que les sommets isolés donnent un parcours minimal
+    sommet_isole = -1
+    for i in range(len(matrice)):
+        if sum(matrice[i]) == 0:  # Si le sommet n'a pas d'arcs sortants
+            sommet_isole = i
+            break
+    if sommet_isole != -1:
+        resultat = parcours_profondeur(matrice, sommet_isole)
+        assert len(resultat) == 1, f"Le parcours depuis un sommet isolé devrait contenir uniquement ce sommet"
+        assert resultat[0] == sommet_isole, "Le parcours depuis un sommet isolé est incorrect"
+    
+    print("Tous les tests sont passés avec succès!")

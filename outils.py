@@ -66,8 +66,7 @@ class Profondeur:
                 visites[sommet] = True
                 sommets_visites.append(sommet)
                 
-                # Parcourir les voisins dans l'ordre inverse pour respecter l'ordre naturel
-                # car on utilise une pile (LIFO)
+                # Parcourir les voisins dans l'ordre inverse pour respecter l'ordre naturel car on utilise une pile
                 for voisin in range(n-1, -1, -1):
                     if matrice_adj[sommet][voisin] == 1 and not visites[voisin]:
                         pile.empiler(voisin)

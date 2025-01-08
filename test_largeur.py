@@ -1,7 +1,7 @@
 from outils import File, parcours_largeur, creer_matrice_adjacence
 
 def tester_parcours_largeur():
-    # Création du graphe à partir des données de go-9-01.txt
+    # Création du graphe (données de go-9-01.txt)
     arcs = [
         (0, 1), (0, 3), (1, 4), (1, 6), (1, 8),
         (2, 4), (2, 5), (2, 6), (3, 4), (3, 7),

@@ -40,7 +40,6 @@ class File:
     
 class Arc:
     def nombre_arcs_matrice_adjacence(matrice):
-        
         count = 0
         for i in range(len(matrice)):
             for j in range(len(matrice[i])):

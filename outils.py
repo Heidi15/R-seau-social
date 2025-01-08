@@ -39,6 +39,12 @@ class File:
         return self.elements[0]
     
 class Largeur:
+    def creer_matrice_adjacence(nb_sommets, arcs):
+        matrice = [[0 for _ in range(nb_sommets)] for _ in range(nb_sommets)]
+        for depart, arrivee in arcs:
+            matrice[depart][arrivee] = 1
+        return matrice
+
     def parcours_largeur(matrice_adjacence, sommet_depart):
         nb_sommets = len(matrice_adjacence)
         visites = []

@@ -1,6 +1,9 @@
 from outils import parcours_profondeur
 
 def lire_graphe(nom_fichier):
+    """
+    Lit un fichier de graphe et retourne la matrice d'adjacence correspondante.
+    """
     with open(nom_fichier, 'r') as f:
         lignes = f.readlines()
         

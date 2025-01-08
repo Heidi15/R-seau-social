@@ -38,4 +38,25 @@ class File:
             raise IndexError("La file est vide")
         return self.elements[0]
     
-class Influenceur:    
+class Influenceur:
+    def plus_grands_influenceurs(reseau):
+        nb_followers = {}
+
+        for personne in reseau:
+            nb_followers[personne] = 0
+        
+        for personne, suivis in reseau.items():
+            for suivi in suivis:
+                if suivi in nb_followers:
+                    nb_followers[suivi] += 1
+        
+        max_followers = 0
+        if nb_followers:
+            max_followers = max(nb_followers.values())
+        
+        influenceurs = [
+            personne for personne, followers in nb_followers.items()
+            if followers == max_followers
+        ]
+        
+        return influenceurs

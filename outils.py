@@ -40,6 +40,17 @@ class File:
 
 class Graphe:
     def charger_graphe(description, type_representation="matrice"):
+        """
+        Charge un graphe à partir d'une description textuelle.
+        
+        Args:
+            description (str): Description du graphe au format texte
+            type_representation (str): "matrice" pour matrice d'adjacence ou "liste" pour liste d'adjacence
+        
+        Returns:
+            tuple: (Som, Mat) ou (Som, Adj) selon le type de représentation choisi
+        """
+        # Extraction des sommets et arêtes
         lignes = description.strip().split("\n")
         sommets = []
         aretes = []
@@ -61,10 +72,13 @@ class Graphe:
                 if ligne not in sommets:
                     sommets.append(ligne)
         
+        # Création de la représentation demandée
         if type_representation == "matrice":
+            # Initialisation de la matrice
             n = len(sommets)
             matrice = [[0] * n for _ in range(n)]
-
+            
+            # Remplissage de la matrice
             for arete in aretes:
                 i = sommets.index(arete[0])
                 j = sommets.index(arete[1])
@@ -74,9 +88,11 @@ class Graphe:
                     
             return (sommets, matrice)
         
-        else:
+        else:  # type_representation == "liste"
+            # Initialisation de la liste d'adjacence
             adj = {sommet: [] for sommet in sommets}
             
+            # Remplissage de la liste d'adjacence
             for arete in aretes:
                 adj[arete[0]].append(arete[1])
                 if "--" in description:  # Graphe non orienté

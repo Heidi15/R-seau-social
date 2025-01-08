@@ -39,4 +39,26 @@ class File:
         return self.elements[0]
     
 class Largeur:
+    def parcours_largeur(matrice_adjacence, sommet_depart):
+        nb_sommets = len(matrice_adjacence)
+        visites = []
+        marques = [False] * nb_sommets
         
+        # Création d'une file pour le parcours en largeur
+        file = File()
+        
+        # On commence par le sommet de départ
+        file.enfiler(sommet_depart)
+        marques[sommet_depart] = True
+        
+        while not file.est_vide():
+            sommet_courant = file.defiler()
+            visites.append(sommet_courant)
+            
+            # On parcourt tous les sommets adjacents
+            for sommet_suivant in range(nb_sommets):
+                if matrice_adjacence[sommet_courant][sommet_suivant] == 1 and not marques[sommet_suivant]:
+                    file.enfiler(sommet_suivant)
+                    marques[sommet_suivant] = True
+                    
+        return visites

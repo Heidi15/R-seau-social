@@ -1,44 +1,22 @@
-from collections import deque
-
-def chemin_minimum(reseau, source, cible):
+def chemin_minimum(graphe, source, destination):
     
-
-    file = deque([(source, [source])])  
-    
-    visites = set()
+    file = [source]  
+    predecesseur = {source: None}  
     
     while file:
-        personne_actuelle, chemin_actuel = file.popleft()
-        
-        
-        if personne_actuelle == cible:
-            return chemin_actuel
-        
-        
-        visites.add(personne_actuelle)
+        personne_actuelle = file.pop(0)
+
+        if personne_actuelle == destination:
+            chemin = []
+            while personne_actuelle is not None:
+                chemin.append(personne_actuelle)
+                personne_actuelle = predecesseur[personne_actuelle]
+            return chemin[::-1]  
+
+        for voisin in graphe.get(personne_actuelle, []):
+            if voisin not in predecesseur:  
+                file.append(voisin)
+                predecesseur[voisin] = personne_actuelle
 
 
-        for voisin in reseau.get(personne_actuelle, []):
-            if voisin not in visites:
-                file.append((voisin, chemin_actuel + [voisin]))
-    
-    
-    return []
-
-
-if __name__ == "__main__":
-   
-    reseau = {
-        "Alice": ["Bob", "Carol"],
-        "Bob": ["Diane"],
-        "Carol": ["Eve", "Diane"],
-        "Diane": ["Eve"],
-        "Eve": []
-    }
-    
-   
-    source = "Alice"
-    cible = "Eve"
-    
-    chemin = chemin_minimum(reseau, source, cible)
-    print(f"Le chemin minimum de {source} à {cible} est : {chemin}")
+    return None

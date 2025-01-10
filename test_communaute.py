@@ -22,4 +22,4 @@ def test_communaute():
 
 if __name__ == "__main__":
     test_communaute()
-    print("\nTous les tests sont passés avec succès!")    
+    print("\nTous les tests sont passés avec succès!") 

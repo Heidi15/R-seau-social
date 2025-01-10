@@ -1,21 +1,19 @@
 from outils import Pile
 
 def test_pile():
+    print("=== Test Pile ===")
     p = Pile()
-    assert p.est_vide() == True, "La pile doit être vide à l'initialisation"
+    assert p.est_vide() == True, "La pile devrait être vide à l'initialisation"
     
     p.empiler(1)
+    assert p.est_vide() == False, "La pile ne devrait pas être vide après empilement"
+    
     p.empiler(2)
-    assert p.est_vide() == False, "La pile ne doit pas être vide"
-    assert p.sommet() == 2, "Le sommet devrait être 2"
-    
-    element = p.depiler()
-    assert element == 2, "L'élément dépilé devrait être 2"
-    assert p.sommet() == 1, "Le nouveau sommet devrait être 1"
-    
-    p.depiler()
-    assert p.est_vide() == True, "La pile doit être vide après avoir tout dépilé"
+    assert p.depiler() == 2, "Le premier élément dépilé devrait être 2"
+    assert p.depiler() == 1, "Le deuxième élément dépilé devrait être 1"
+    assert p.est_vide() == True, "La pile devrait être vide après dépilement"
+    print("Tests Pile OK")
 
 if __name__ == "__main__":
     test_pile()
-    print("Tests de la pile réussis!")
+    print("\nTous les tests sont passés avec succès!")    

@@ -37,3 +37,18 @@ class File:
         if self.est_vide():
             raise IndexError("La file est vide")
         return self.elements[0]
+    
+class Communauté: 
+    def est_une_seule_communauté(matrice_adjacence):
+        def dfs(sommet, visites):
+            """Effectue un parcours en profondeur à partir d'un sommet donné."""
+        visites[sommet] = True
+        for voisin, est_adjacent in enumerate(matrice_adjacence[sommet]):
+            if est_adjacent == 1 and not visites[voisin]:
+                dfs(voisin, visites)
+
+        n = len(matrice_adjacence)
+        visites = [False] * n
+        dfs(0, visites)
+
+        return all(visites)   

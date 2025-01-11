@@ -29,7 +29,15 @@ class File:
         return len(self.elements) == 0
 
 def nombre_aretes_matrice(matrice):
-    """Compte le nombre d'arêtes dans un graphe non orienté utilisant une matrice d'adjacence"""
+    """
+    Compte le nombre d'arêtes dans un graphe non orienté représenté par une matrice d'adjacence
+    
+    Args:
+        matrice: Matrice d'adjacence du graphe
+    
+    Returns:
+        Nombre d'arêtes dans le graphe
+    """
     count = 0
     for i in range(len(matrice)):
         for j in range(i + 1, len(matrice)):  # Compte uniquement le triangle supérieur
@@ -38,14 +46,30 @@ def nombre_aretes_matrice(matrice):
     return count
 
 def nombre_aretes_liste(liste_adj):
-    """Compte le nombre d'arêtes dans un graphe non orienté utilisant une liste d'adjacence"""
+    """
+    Compte le nombre d'arêtes dans un graphe non orienté représenté par une liste d'adjacence
+    
+    Args:
+        liste_adj: Liste d'adjacence du graphe
+    
+    Returns:
+        Nombre d'arêtes dans le graphe
+    """
     count = 0
     for sommet, voisins in liste_adj.items():
         count += len(voisins)
     return count // 2  # Divise par 2 car chaque arête est comptée deux fois
 
 def nombre_arcs_matrice(matrice):
-    """Compte le nombre d'arcs dans un graphe orienté utilisant une matrice d'adjacence"""
+    """
+    Compte le nombre d'arcs dans un graphe orienté représenté par une matrice d'adjacence
+    
+    Args:
+        matrice: Matrice d'adjacence du graphe
+    
+    Returns:
+        Nombre d'arcs dans le graphe
+    """
     count = 0
     for i in range(len(matrice)):
         for j in range(len(matrice)):
@@ -54,11 +78,28 @@ def nombre_arcs_matrice(matrice):
     return count
 
 def nombre_arcs_liste(liste_adj):
-    """Compte le nombre d'arcs dans un graphe orienté utilisant une liste d'adjacence"""
+    """
+    Compte le nombre d'arcs dans un graphe orienté représenté par une liste d'adjacence
+    
+    Args:
+        liste_adj: Liste d'adjacence du graphe
+    
+    Returns:
+        Nombre d'arcs dans le graphe
+    """
     return sum(len(voisins) for voisins in liste_adj.values())
 
 def charger_graphe(description, type_representation="matrice"):
-    """Charge un graphe à partir d'une description textuelle"""
+    """
+    Charge un graphe à partir d'une description textuelle
+    
+    Args:
+        description: Description textuelle du graphe
+        type_representation: Type de représentation souhaité ("matrice" ou "liste")
+    
+    Returns:
+        Tuple contenant la liste des sommets et la représentation du graphe choisie
+    """
     lignes = description.strip().split("\n")
     est_oriente = "ORIENTE" in lignes[0]
     nb_sommets = int(lignes[1].split()[0])
@@ -102,7 +143,16 @@ def charger_graphe(description, type_representation="matrice"):
         return (sommets, liste_adj)
 
 def parcours_profondeur(matrice_adj, sommet_depart):
-    """Parcours en profondeur d'un graphe"""
+    """
+    Réalise un parcours en profondeur du graphe
+    
+    Args:
+        matrice_adj: Matrice d'adjacence du graphe
+        sommet_depart: Indice du sommet de départ
+    
+    Returns:
+        Liste des sommets visités dans l'ordre du parcours
+    """
     n = len(matrice_adj)
     visites = [False] * n
     resultat = []
@@ -118,7 +168,16 @@ def parcours_profondeur(matrice_adj, sommet_depart):
     return resultat
 
 def parcours_largeur(matrice_adj, sommet_depart):
-    """Parcours en largeur d'un graphe"""
+    """
+    Réalise un parcours en largeur du graphe
+    
+    Args:
+        matrice_adj: Matrice d'adjacence du graphe
+        sommet_depart: Indice du sommet de départ
+    
+    Returns:
+        Liste des sommets visités dans l'ordre du parcours
+    """
     n = len(matrice_adj)
     visites = [False] * n
     resultat = []
@@ -139,14 +198,31 @@ def parcours_largeur(matrice_adj, sommet_depart):
     return resultat
 
 def une_seule_communaute(matrice_adj):
-    """Vérifie si le réseau forme une seule communauté"""
+    """
+    Vérifie si le réseau forme une seule communauté
+    
+    Args:
+        matrice_adj: Matrice d'adjacence du graphe
+    
+    Returns:
+        True si le graphe forme une seule communauté, False sinon
+    """
     if len(matrice_adj) == 0:
         return True
     visites = parcours_largeur(matrice_adj, 0)
     return len(visites) == len(matrice_adj)
 
 def plus_grands_influenceurs(matrice_adj, sommets):
-    """Trouve les utilisateurs les plus influents"""
+    """
+    Trouve les utilisateurs les plus influents du réseau
+    
+    Args:
+        matrice_adj: Matrice d'adjacence du graphe
+        sommets: Liste des noms des sommets
+    
+    Returns:
+        Liste des noms des plus grands influenceurs
+    """
     nb_followers = [sum(matrice_adj[j][i] for j in range(len(matrice_adj))) 
                    for i in range(len(matrice_adj))]
     max_followers = max(nb_followers)
@@ -154,14 +230,36 @@ def plus_grands_influenceurs(matrice_adj, sommets):
             if nb_followers[i] == max_followers]
 
 def temps_propagation(matrice_adj, source, cible):
-    """Calcule le temps de propagation entre deux utilisateurs"""
+    """
+    Calcule le temps de propagation entre deux utilisateurs
+    
+    Args:
+        matrice_adj: Matrice d'adjacence du graphe
+        source: Indice du sommet source
+        cible: Indice du sommet cible
+        temps_propagation_unitaire: Temps de propagation entre deux sommets adjacents
+    
+    Returns:
+        Temps de propagation ou -1 si aucun chemin n'existe
+    """
     chemin = parcours_largeur(matrice_adj, source)
     if cible not in chemin:
         return -1
     return chemin.index(cible) * 5  # 5 minutes par étape (on peut modifier le temps)
 
 def chemin_propagation(matrice_adj, sommets, source, destination):
-    """Trouve le chemin de propagation le plus court"""
+    """
+    Trouve le chemin de propagation le plus court
+    
+    Args:
+        matrice_adj: Matrice d'adjacence du graphe
+        sommets: Liste des noms des sommets
+        source: Nom du sommet source
+        destination: Nom du sommet destination
+    
+    Returns:
+        Liste des noms des sommets formant le chemin le plus court ou None si aucun chemin n'existe
+    """
     file = File()
     source_idx = sommets.index(source)
     dest_idx = sommets.index(destination)
@@ -197,7 +295,24 @@ class Generation_Graphe:
         self.graphe = {}
         
     def creation_graphe(self, oriente, nb_sommets, min_deg, max_deg, nb_communautes, distance_max=None):
-        """Crée un graphe aléatoire avec les contraintes données"""
+        """
+        Crée un graphe aléatoire respectant les contraintes données.
+        
+        Args:
+            oriente: True si le graphe est orienté, False sinon
+            nb_sommets: Nombre total de sommets dans le graphe
+            min_deg: Degré minimum de chaque sommet
+            max_deg: Degré maximum de chaque sommet
+            nb_communautes: Nombre de communautés distinctes à créer
+            distance_max: Distance maximale entre deux sommets (optionnel)
+        
+        Returns:
+            Dictionnaire représentant le graphe sous forme de liste d'adjacence
+        
+        Raises:
+            ValueError: Si les paramètres sont incohérents
+                (ex: min_deg > max_deg ou nb_communautes > nb_sommets)
+        """
         import random
         
         self.graphe = {i: [] for i in range(nb_sommets)}
@@ -229,7 +344,23 @@ class Generation_Graphe:
         return self.graphe
     
     def enregistrer_graphe(self, fichier, oriente=True):
-        """Sauvegarde le graphe dans un fichier"""
+        """
+        Sauvegarde le graphe dans un fichier texte au format spécifié.
+        
+        Le format du fichier est le suivant:
+        - Première ligne: "GRAPHE ORIENTE" ou "GRAPHE NON ORIENTE"
+        - Deuxième ligne: nombre de sommets suivi de "SOMMETS"
+        - Une ligne par sommet avec son identifiant
+        - Une ligne avec le nombre d'arcs/arêtes suivi de "ARCS" ou "ARETES"
+        - Une ligne par arc/arête avec les deux sommets concernés
+        
+        Args:
+            fichier: Chemin du fichier de sortie
+            oriente: True si le graphe est orienté, False sinon
+        
+        Raises:
+            IOError: Si l'écriture dans le fichier échoue
+        """
         with open(fichier, 'w') as f:
             f.write("GRAPHE ORIENTE\n" if oriente else "GRAPHE NON ORIENTE\n")
             f.write(f"{len(self.graphe)} SOMMETS\n")

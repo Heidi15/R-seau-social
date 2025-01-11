@@ -3,7 +3,8 @@ Projet « Réseau Social »
 
 Membres du groupe : Heidi, Léa, Sellia
 
-Toutes les fonctions sont terminées. Actuellement en train de faire les fichiers de tests pour chaque User Story.
+Progression actuelle : 
+Il manque certaines docstrings pour commenter les fonctions des fichiers tests.
 
 Contraintes de réalisation :
 - Pas de module Python de manipulation de graphes
